@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اضحك واكسب - Laugh and Win</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">😂 اضحك واكسب</div>
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>القائمة</h3>
+            <button class="close-sidebar" onclick="toggleSidebar()">×</button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#" onclick="showSection('profile')"><i>👤</i> ملفي</a></li>
+            <li><a href="#" onclick="showSection('privacy')"><i>🔒</i> الخصوصية</a></li>
+            <li><a href="#" onclick="toggleDarkMode()"><i>🌙</i> الوضع الليلي</a></li>
+            <li><a href="#" onclick="rateApp()"><i>⭐</i> قيّمنا</a></li>
+            <li><a href="#" onclick="logout()"><i>🚪</i> تسجيل خروج</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Home Section -->
+        <div id="home" class="main-content active">
+            <!-- Add Joke Form -->
+            <div class="add-joke-form">
+                <h3>شارك نكتتك اليومية! 😄</h3>
+                <textarea 
+                    id="jokeInput" 
+                    class="joke-input" 
+                    placeholder="اكتب نكتة مضحكة... (200 حرف كحد أقصى)"
+                    maxlength="200"
+                    oninput="updateCharCounter()"
+                ></textarea>
+                <div class="char-counter" id="charCounter">0/200</div>
+                <button class="submit-btn" onclick="addJoke()">انشر النكتة 🚀</button>
+            </div>
+
+            <!-- Jokes Feed -->
+            <div id="jokesFeed">
+                <!-- Jokes will be populated here -->
+            </div>
+        </div>
+
+        <!-- Rating Section -->
+        <div id="rating" class="main-content">
+            <div class="leaderboard">
+                <h3>🏆 سباق النكت الأسبوعي</h3>
+                <div class="rank-item">
+                    <div class="rank-info">
+                        <div class="rank-number gold">1</div>
+                        <div class="rank-user">أحمد الكوميدي</div>
+                    </div>
+                    <div class="rank-points">1250 نقطة</div>
+                </div>
+                <div class="rank-item">
+                    <div class="rank-info">
+                        <div class="rank-number silver">2</div>
+                        <div class="rank-user">سارة المضحكة</div>
+                    </div>
+                    <div class="rank-points">980 نقطة</div>
+                </div>
+                <div class="rank-item">
+                    <div class="rank-info">
+                        <div class="rank-number bronze">3</div>
+                        <div class="rank-user">محمد الضاحك</div>
+                    </div>
+                    <div class="rank-points">750 نقطة</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Joke Section -->
+        <div id="add-joke" class="main-content">
+            <div class="add-joke-form">
+                <h3>أضف نكتة جديدة 🎭</h3>
+                <textarea 
+                    id="newJokeInput" 
+                    class="joke-input" 
+                    placeholder="شارك إبداعك في نكتة مضحكة..."
+                    maxlength="200"
+                    oninput="updateNewJokeCounter()"
+                ></textarea>
+                <div class="char-counter" id="newJokeCounter">0/200</div>
+                <button class="submit-btn" onclick="addNewJoke()">نشر النكتة 🎉</button>
+            </div>
+        </div>
+
+        <!-- Competition Section -->
+        <div id="competition" class="main-content">
+            <div class="leaderboard">
+                <h3>🎯 المنافسة الأسبوعية</h3>
+                <div style="text-align: center; color: #fff; margin-bottom: 20px;">
+                    <h4>الجوائز هذا الأسبوع:</h4>
+                    <p>🥇 المركز الأول: 50 جنيه + 500 نقطة</p>
+                    <p>🥈 المركز الثاني: 50 جنيه + 350 نقطة</p>
+                    <p>🥉 المركز الثالث: 50 جنيه + 250 نقطة</p>
+                </div>
+                <div class="rank-item">
+                    <div class="rank-info">
+                        <div class="rank-number gold">1</div>
+                        <div class="rank-user">أنت</div>
+                    </div>
+                    <div class="rank-points">850 نقطة</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div id="settings" class="main-content">
+            <div class="settings-section">
+                <h3 style="color: #fff; margin-bottom: 20px; text-align: center;">⚙️ الإعدادات</h3>
+                
+                <div class="setting-item">
+                    <div class="setting-label">الوضع الليلي</div>
+                    <div class="toggle-switch" onclick="toggleDarkMode()" id="darkModeToggle">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-label">الإشعارات</div>
+                    <div class="toggle-switch" onclick="toggleNotifications()">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-label">تغيير كلمة المرور</div>
+                    <button class="action-btn" onclick="changePassword()">تغيير</button>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-label">رقم المحفظة</div>
+                    <button class="action-btn" onclick="editWallet()">تحديث</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div id="profile" class="main-content">
+            <div class="profile-section">
+                <div class="profile-avatar">م</div>
+                <div class="profile-name">محمد أحمد</div>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">25</div>
+                        <div class="stat-label">نكتة</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">850</div>
+                        <div class="stat-label">نقطة</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">مركز</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-container">
+            <div class="nav-item active" onclick="showSection('home')">
+                <i>🏠</i>
+                <span>الرئيسية</span>
+            </div>
+            <div class="nav-item" onclick="showSection('rating')">
+                <i>⭐</i>
+                <span>تقييم</span>
+            </div>
+            <div class="nav-item" onclick="showSection('add-joke')">
+                <i>➕</i>
+                <span>أضف نكتة</span>
+            </div>
+            <div class="nav-item" onclick="showSection('competition')">
+                <i>🏆</i>
+                <span>السباق</span>
+            </div>
+            <div class="nav-item" onclick="showSection('settings')">
+                <i>⚙️</i>
+                <span>الإعدادات</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
